@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Phone Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📱 Lost Phone Tracker</h1>
+            <p>Help reunite lost phones with their owners</p>
+        </header>
+
+        <main>
+            <section class="form-section">
+                <h2>Report a Lost Phone</h2>
+                <form id="phoneForm">
+                    <div class="form-group">
+                        <label for="ownerName">Owner Name:</label>
+                        <input type="text" id="ownerName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phoneModel">Phone Model:</label>
+                        <input type="text" id="phoneModel" placeholder="e.g., iPhone 13 Pro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color">Color:</label>
+                        <input type="text" id="color" placeholder="e.g., Space Gray" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lostDate">Date Lost:</label>
+                        <input type="date" id="lostDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Last Known Location:</label>
+                        <input type="text" id="location" placeholder="e.g., Downtown Mall" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phoneNumber">Contact Phone Number:</label>
+                        <input type="tel" id="phoneNumber" placeholder="e.g., (555) 123-4567" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Additional Details:</label>
+                        <textarea id="description" rows="4" placeholder="Any distinguishing features or circumstances..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Report Lost Phone</button>
+                </form>
+            </section>
+
+            <section class="list-section">
+                <h2>Lost Phones List</h2>
+                <div class="filter-controls">
+                    <input type="text" id="searchInput" placeholder="Search by owner name, model, or location...">
+                    <button class="btn-secondary" onclick="filterPhones()">Search</button>
+                </div>
+                <div id="phonesList" class="phones-list">
+                    <p class="no-data">No lost phones reported yet.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Lost Phone Tracker. Help someone find their phone today!</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
