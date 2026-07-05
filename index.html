@@ -4,79 +4,223 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost Phone Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>📱 Lost Phone Tracker</h1>
-            <p>Help reunite lost phones with their owners</p>
+            <div class="header-content">
+                <h1><i class="fas fa-mobile-alt"></i> Lost Phone Tracker</h1>
+                <p>Help reunite lost phones with their owners</p>
+            </div>
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-value" id="totalPhones">0</span>
+                    <span class="stat-label">Reports</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="todayPhones">0</span>
+                    <span class="stat-label">Today</span>
+                </div>
+            </div>
         </header>
 
         <main>
-            <section class="form-section">
-                <h2>Report a Lost Phone</h2>
+            <!-- Tabs Navigation -->
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="report">
+                    <i class="fas fa-plus-circle"></i> Report Phone
+                </button>
+                <button class="tab-btn" data-tab="list">
+                    <i class="fas fa-list"></i> View Reports
+                </button>
+                <button class="tab-btn" data-tab="stats">
+                    <i class="fas fa-chart-pie"></i> Statistics
+                </button>
+            </div>
+
+            <!-- Report Tab -->
+            <section class="form-section tab-content active" id="report">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-alt"></i> Report a Lost Phone</h2>
+                    <p class="section-subtitle">Provide detailed information to help locate the phone</p>
+                </div>
                 <form id="phoneForm">
-                    <div class="form-group">
-                        <label for="ownerName">Owner Name:</label>
-                        <input type="text" id="ownerName" required>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ownerName">
+                                <i class="fas fa-user"></i> Owner Name:
+                            </label>
+                            <input type="text" id="ownerName" placeholder="Full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">
+                                <i class="fas fa-phone"></i> Contact Phone:
+                            </label>
+                            <input type="tel" id="phoneNumber" placeholder="(555) 123-4567" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">
+                                <i class="fas fa-envelope"></i> Email Address:
+                            </label>
+                            <input type="email" id="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lostDate">
+                                <i class="fas fa-calendar"></i> Date Lost:
+                            </label>
+                            <input type="date" id="lostDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phoneModel">
+                                <i class="fas fa-mobile-alt"></i> Phone Model:
+                            </label>
+                            <input type="text" id="phoneModel" placeholder="e.g., iPhone 13 Pro" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="color">
+                                <i class="fas fa-palette"></i> Color:
+                            </label>
+                            <input type="text" id="color" placeholder="e.g., Space Gray" required>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="phoneModel">Phone Model:</label>
-                        <input type="text" id="phoneModel" placeholder="e.g., iPhone 13 Pro" required>
+                        <label for="location">
+                            <i class="fas fa-map-marker-alt"></i> Last Known Location:
+                        </label>
+                        <input type="text" id="location" placeholder="e.g., Downtown Mall, Main Street" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="color">Color:</label>
-                        <input type="text" id="color" placeholder="e.g., Space Gray" required>
+                        <label for="description">
+                            <i class="fas fa-sticky-note"></i> Additional Details:
+                        </label>
+                        <textarea id="description" rows="4" placeholder="Any distinguishing features, case details, accessories, etc..."></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="lostDate">Date Lost:</label>
-                        <input type="date" id="lostDate" required>
+                        <label for="reward">
+                            <i class="fas fa-gift"></i> Reward (Optional):
+                        </label>
+                        <div class="reward-input">
+                            <span>$</span>
+                            <input type="number" id="reward" placeholder="0" min="0">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="location">Last Known Location:</label>
-                        <input type="text" id="location" placeholder="e.g., Downtown Mall" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phoneNumber">Contact Phone Number:</label>
-                        <input type="tel" id="phoneNumber" placeholder="e.g., (555) 123-4567" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address:</label>
-                        <input type="email" id="email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Additional Details:</label>
-                        <textarea id="description" rows="4" placeholder="Any distinguishing features or circumstances..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-primary">Report Lost Phone</button>
+                    <button type="submit" class="btn-primary btn-large">
+                        <i class="fas fa-check-circle"></i> Report Lost Phone
+                    </button>
                 </form>
             </section>
 
-            <section class="list-section">
-                <h2>Lost Phones List</h2>
-                <div class="filter-controls">
-                    <input type="text" id="searchInput" placeholder="Search by owner name, model, or location...">
-                    <button class="btn-secondary" onclick="filterPhones()">Search</button>
+            <!-- List Tab -->
+            <section class="list-section tab-content" id="list">
+                <div class="section-header">
+                    <h2><i class="fas fa-clipboard-list"></i> Lost Phones Directory</h2>
+                    <p class="section-subtitle">Find and help reunite phones with their owners</p>
                 </div>
-                <div id="phonesList" class="phones-list">
-                    <p class="no-data">No lost phones reported yet.</p>
+
+                <div class="filter-section">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search by name, model, location, color...">
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">
+                            <i class="fas fa-th"></i> All
+                        </button>
+                        <button class="filter-btn" data-filter="today">
+                            <i class="fas fa-calendar-today"></i> Today
+                        </button>
+                        <button class="filter-btn" data-filter="week">
+                            <i class="fas fa-calendar-week"></i> This Week
+                        </button>
+                        <button class="filter-btn" data-filter="reward">
+                            <i class="fas fa-gift"></i> Has Reward
+                        </button>
+                    </div>
+                    <button class="btn-secondary" onclick="tracker.filterPhones()">
+                        <i class="fas fa-filter"></i> Search
+                    </button>
+                </div>
+
+                <div class="view-toggle">
+                    <button class="view-btn active" id="gridView">
+                        <i class="fas fa-th"></i> Grid
+                    </button>
+                    <button class="view-btn" id="listView">
+                        <i class="fas fa-list-ul"></i> List
+                    </button>
+                </div>
+
+                <div id="phonesList" class="phones-list grid-view">
+                    <div class="empty-state">
+                        <i class="fas fa-mobile-alt"></i>
+                        <p>No lost phones reported yet.</p>
+                        <p class="empty-subtitle">Be the first to report a phone</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Tab -->
+            <section class="stats-section tab-content" id="stats">
+                <div class="section-header">
+                    <h2><i class="fas fa-analytics"></i> Statistics & Insights</h2>
+                    <p class="section-subtitle">Track reporting trends and insights</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3>Total Reports</h3>
+                        <p class="stat-number" id="statTotal">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-fire"></i></div>
+                        <h3>This Week</h3>
+                        <p class="stat-number" id="statWeek">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-sun"></i></div>
+                        <h3>Today</h3>
+                        <p class="stat-number" id="statToday">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-gift"></i></div>
+                        <h3>Total Rewards</h3>
+                        <p class="stat-number" id="statRewards">$0</p>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-box">
+                        <h3><i class="fas fa-mobile-alt"></i> Most Lost Phone Models</h3>
+                        <div id="phoneModelsChart" class="chart-content"></div>
+                    </div>
+                    <div class="chart-box">
+                        <h3><i class="fas fa-map-marker-alt"></i> Top Locations</h3>
+                        <div id="locationsChart" class="chart-content"></div>
+                    </div>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>&copy; 2026 Lost Phone Tracker. Help someone find their phone today!</p>
+            <p><i class="fas fa-heart"></i> Lost Phone Tracker - Help someone find their phone today!</p>
         </footer>
     </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
 
     <script src="app.js"></script>
 </body>
